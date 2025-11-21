@@ -2,7 +2,7 @@
 
 ## Safe Code Checker – Developer Setup Guide
 
-1. Prerequisites
+### 1. Prerequisites
 
 Before starting, install:
 
@@ -19,15 +19,15 @@ https://ollama.com/download
 
 ```ollama pull llama3.1```
 
-2. Install Project Dependencies
+### 2. Install Project Dependencies
 
 ```npm install```
 
-3. Build the extension
+### 3. Build the extension
 
 ```npm run compile```
 
-4. Run the Extension in Debug Mode (F5)
+### 4. Run the Extension in Debug Mode (F5)
 
 VS Code provides a built-in extension development host.
 To launch it:
@@ -43,7 +43,7 @@ To launch it:
 5. Run the Safe Code Checker Command
 
 
-5. Inside the Extension Development Host:
+### 5. Inside the Extension Development Host:
 
 1. Press Cmd+Shift+P (macOS)
 or Ctrl+Shift+P (Windows/Linux)
@@ -61,7 +61,7 @@ The extension will:
 - Display results in a fresh Markdown document
 
 
-6. How the Flow Works
+### 6. How the Flow Works
 
 1. extension.ts registers a command (safecodechecker.checkcode).
 
