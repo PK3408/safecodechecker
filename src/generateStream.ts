@@ -22,10 +22,15 @@ export async function generateStream(code: string): Promise<string> {
 
     const model = "llama3.1:latest"
 
-    const finalPrompt = promptTemplate.replace("{code}", code) +
-        "\n\nReturn ONLY valid JSON. If unable, return raw text.";
-    console.log("Sending prompt\n", finalPrompt.substring(0, 100) + "...");
+    // add line numbers to ensure accurate reporting
+    const numberedCode = addLineNumbers(code);
 
+    // replace {code} in prompt template
+    const finalPrompt = promptTemplate.replace("{code}", numberedCode) +
+        "\n\nReturn ONLY valid JSON. If unable, return raw text.";
+    console.log("Sending prompt\n", finalPrompt.substring(0, 700) + "...");
+
+    // call Ollama API
     const res = await fetch(
         "http://localhost:11434/api/generate", 
         {
@@ -52,6 +57,7 @@ export async function generateStream(code: string): Promise<string> {
     if (!res.body) {
         throw new Error("No response body from Ollama");
     }
+
     // print model name
     console.log("Receiving streamed response from", model);
     jsonResult = await res.json(); // { response: "..." }
@@ -77,4 +83,10 @@ function extractJson(text: string): string {
     }
 
     return text.substring(start, end + 1);
+}
+
+
+function addLineNumbers(code: string): string {
+    const lines = code.split('\n');
+    return lines.map((line, index) => `${index + 1}: ${line}`).join('\n');
 }
