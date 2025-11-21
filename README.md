@@ -77,3 +77,30 @@ The extension will:
     - JSON view as a split.
     - Inline code highlights
     - Problems Panel
+
+
+### 7. Troubleshooting
+
+ 1. Cannot find module 'js-yaml', 
+ 
+ Run:
+
+```npm install js-yaml @types/js-yaml```
+
+2. Command not found: safecodechecker.checkcode
+Ensure package.json has the same command name and elsewhere like in extension.ts
+
+```c
+"activationEvents": [
+  "onCommand:safecodechecker.checkcode"
+],
+"contributes": {
+  "commands": [
+    {
+      "command": "safecodechecker.checkcode",
+      "title": "check for safe code"
+    }
+  ]
+}
+```
+
